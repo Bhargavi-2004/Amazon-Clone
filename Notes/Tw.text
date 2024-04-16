@@ -1,0 +1,13 @@
+tw-element:
+
+TW Elements (sometimes written as tw-elements) is a collection of free, pre-built UI components designed 
+specifically to work with Tailwind CSS. 
+It provides a library of interactive elements that streamline the development process by offering ready-made 
+components you can integrate into your Tailwind projects.
+
+Offers a wide range of UI components, including buttons, forms, modals, dropdowns, navigation bars, carousels, and 
+more (over 500 components in total).
+Many components are interactive, handling functionality like displaying/hiding content, toggling states, and 
+managing user interactions.
+Provides a simple and easy-to-use API for customization, allowing you to tailor the components' appearance and 
+behavior to your needs.

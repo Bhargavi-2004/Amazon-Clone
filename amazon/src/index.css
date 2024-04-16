@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.homePage {
+  @apply text-2xl bg-gradient-to-tr;
+}
