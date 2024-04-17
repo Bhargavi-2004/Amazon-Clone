@@ -5,3 +5,7 @@
 .homePage {
   @apply text-2xl bg-gradient-to-tr;
 }
+
+.productImage {
+  height: 200px;
+}
