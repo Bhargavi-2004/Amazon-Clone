@@ -1,18 +1,17 @@
 import "./App.css";
+import Checkout from "./Components/Checkout";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <div className="App">
-        <Navbar />
         <Routes>
-          <Route exact path="/" element={<Home />}/>
-          <Route exact path="/checkout">
-            <p>Checkout</p>
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </div>
     </Router>

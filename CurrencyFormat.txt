@@ -1,0 +1,18 @@
+Currency Format:
+var CurrencyFormat = require('react-currency-format');
+
+<CurrencyFormat 
+    value={2456981} 
+    displayType={'text'} 
+    thousandSeparator={true} 
+    prefix={'$'} 
+    renderText={value => <div>{value}</div>} 
+/>
+
+Output:
+$2,456,981 
+
+<CurrencyFormat format="##/##" placeholder="MM/YY" mask={['M', 'M', 'Y', 'Y']}/>
+
+Refer for more:
+https://www.npmjs.com/package/react-currency-format

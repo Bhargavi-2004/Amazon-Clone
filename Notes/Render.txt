@@ -1,0 +1,13 @@
+<Route>
+
+The Route component is perhaps the most important component in React Router 
+to understand and learn to use well. Its most basic responsibility is to render some UI when its path matches 
+the current URL.
+
+Route props:
+All three render methods will be passed the same three route props
+1. match
+2. location
+3. history
+
+https://v5.reactrouter.com/web/api/Route/exact-bool

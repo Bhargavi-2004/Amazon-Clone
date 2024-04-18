@@ -9,3 +9,6 @@
 .productImage {
   height: 200px;
 }
+body {
+  @apply bg-slate-200;
+}
