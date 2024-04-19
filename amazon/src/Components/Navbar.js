@@ -3,8 +3,10 @@ import amazonLogo from "../Components/img/amazonLogo.png";
 import searchGlass from "../Components/img/searchGlass.png";
 import cartIcon from "../Components/img/cartIcon.png";
 import { Link } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
 
 function Navbar() {
+  const [{ basket }] = useStateValue();
   return (
     <>
       {/* navbar start */}
@@ -42,12 +44,13 @@ function Navbar() {
             <span className="font-bold text-sm">Prime</span>
           </div>
           <Link to="/checkout">
-            <div className="option">
+            <div className="option flex flex-row">
               <img
                 src={cartIcon}
                 alt="search"
                 className="h-12 my-2 ml-0 p-1.5"
               />
+              <span className="py-5 font-bold">{basket?.length}</span>
             </div>
           </Link>
         </div>

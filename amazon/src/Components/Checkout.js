@@ -17,7 +17,7 @@ const Checkout = () => {
         </div>
       </div>
       {/* rightPart */}
-      <div className="checkoutRight">
+      <div className="checkoutRight flex flex-col justify-evenly">
         <Subtotal />
         <h1 className="text-2xl text-left font-bold">
           The subtotal will go here
@@ -28,3 +28,4 @@ const Checkout = () => {
 };
 
 export default Checkout;
+// https://youtu.be/RDV3Z1KCBvo?si=xvdqu-wjJo5ikMDB&t=7202

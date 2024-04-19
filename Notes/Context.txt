@@ -1,0 +1,14 @@
+COntext API/ Reducer:
+
+Wrap your app in Provider so every component can access 
+that particular detail.
+
+Creating context: 
+Context lets components pass information deep down without 
+explicitly passing props.
+
+createContext returns a context object. Components can 
+read context by passing it to useContext().
+
+Context is useful because you can provide other, dynamic 
+values from your components:
