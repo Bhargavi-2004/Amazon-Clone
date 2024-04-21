@@ -1,10 +1,13 @@
 import React from "react";
 import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../context/StateProvider";
+import { getBasket } from "../context/reducer";
 
 const Subtotal = () => {
   const [{ basket }] = useStateValue();
   const [itemCount, setItemCount] = React.useState(basket.length); // State for item count
+
+  // eslint-disable-next-line
   var priceCount = 0;
 
   const handleItemCountChange = (event) => {
@@ -38,7 +41,7 @@ const Subtotal = () => {
           </div>
         )}
         decimalScale={2}
-        value={priceCount}
+        value={getBasket(basket)}
         displayType="text"
         thousandSeparator={true}
         prefix="₹"
@@ -51,5 +54,3 @@ const Subtotal = () => {
 };
 
 export default Subtotal;
-
-// https://youtu.be/RDV3Z1KCBvo?si=C_eWdOM-AKgF1R4A&t=9244

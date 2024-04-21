@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Home />} />
         </Routes>
       </div>
     </Router>
@@ -19,4 +20,5 @@ function App() {
 }
 
 export default App;
-// https://www.youtube.com/watch?v=RDV3Z1KCBvo&t=1427s
+
+// https://youtu.be/RDV3Z1KCBvo?si=XkC-aUFMwEnU79VO&t=12212
