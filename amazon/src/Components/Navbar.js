@@ -4,9 +4,18 @@ import searchGlass from "../Components/img/searchGlass.png";
 import cartIcon from "../Components/img/cartIcon.png";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 function Navbar() {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
+
+  const handlAuthentication = () => {
+    if (user) {
+      // eslint-disable-next-line
+      const signout = signOut(auth);
+    }
+  };
   return (
     <>
       {/* navbar start */}
@@ -31,10 +40,16 @@ function Navbar() {
 
         {/* sign in */}
         <div className="flex text-white flex-row mx-5 space-x-5">
-          <div className="option flex flex-col">
-            <span className="text-xs">Hello, sign in</span>
-            <span className="font-bold text-sm">Accounts & Lists</span>
-          </div>
+          <Link to={!user && "/login"}>
+            <div onClick={handlAuthentication} className="option flex flex-col">
+              <span className="text-xs">
+                Hello, {user?.email}
+              </span>
+              <span className="font-bold text-sm">
+                {user ? "Sign out" : "Sign In"}
+              </span>
+            </div>
+          </Link>
           <div className="option flex flex-col">
             <span className="text-xs">Returns</span>
             <span className="font-bold text-sm">& Orders</span>

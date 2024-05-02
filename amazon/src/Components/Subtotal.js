@@ -2,10 +2,13 @@ import React from "react";
 import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../context/StateProvider";
 import { getBasket } from "../context/reducer";
+import { useNavigate } from "react-router-dom";
 
 const Subtotal = () => {
   const [{ basket }] = useStateValue();
   const [itemCount, setItemCount] = React.useState(basket.length); // State for item count
+
+  const navigate = useNavigate();
 
   // eslint-disable-next-line
   var priceCount = 0;
@@ -46,7 +49,10 @@ const Subtotal = () => {
         thousandSeparator={true}
         prefix="₹"
       />
-      <button className="bg-yellow-500 font-bold border-2 rounded-md ">
+      <button
+        onClick={() => navigate("/payment")}
+        className="bg-yellow-500 font-bold border-2 rounded-md "
+      >
         Procees to checkout
       </button>
     </div>

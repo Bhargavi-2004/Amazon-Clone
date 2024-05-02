@@ -5,7 +5,7 @@ import { useStateValue } from "../context/StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 
 const Checkout = () => {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
 
   return (
     <div className="checkoutPage bg-white flex justify-evenly">
@@ -17,17 +17,24 @@ const Checkout = () => {
           className="shadow-lg shadow-gray-200 "
         />
         <div className="checkoutList">
-          <h1 className="text-2xl text-left font-bold ml-8">Your Shopping Basket</h1>
+          <h3 className="text-left font-bold ml-8">
+            Hello,<br></br> {user?.email}
+          </h3>
+          <h1 className="text-2xl text-left font-bold ml-8">
+            Your Shopping Basket
+          </h1>
 
           {/* CheckoutProducts */}
           {basket.map((item) => {
-            return <CheckoutProduct
-              id={item.id}
-              title={item.title}
-              image={item.image}
-              price={item.price}
-              rating={item.rating}
-            />;
+            return (
+              <CheckoutProduct
+                id={item.id}
+                title={item.title}
+                image={item.image}
+                price={item.price}
+                rating={item.rating}
+              />
+            );
           })}
         </div>
       </div>
