@@ -19,9 +19,12 @@ app.get("/", (request, response) => {
   response.status(200).send("Hello world");
 });
 
+app.post("/order", (req, res) => {
+  res.status(200).send("order Page");
+});
+
 app.post("/payment/create", async (request, response) => {
   const total = request.query.total;
-
   console.log("Payment Request Recieved!! for this amount --->  ", total);
 
   const paymentIntent = await stripe.paymentIntents.create({
@@ -29,7 +32,6 @@ app.post("/payment/create", async (request, response) => {
     currency: "usd",
   });
 
-  //OK- Created
   response.status(201).send({
     clientSecret: paymentIntent.client_secret,
   });
@@ -43,3 +45,7 @@ exports.api = functions.https.onRequest(app);
 
 // Deployed:
 // https://challenge-cd848.web.app/checkout
+
+// https://youtu.be/DMoUqfPybNw?si=BOiyUqrbFH4qewvc&t=961
+
+// https://youtu.be/RDV3Z1KCBvo?si=0U5cnS33VVb4h2MQ&t=26047

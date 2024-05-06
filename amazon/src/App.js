@@ -70,4 +70,3 @@ function App() {
 
 export default App;
 
-// https://youtu.be/RDV3Z1KCBvo?si=XkC-aUFMwEnU79VO&t=12212

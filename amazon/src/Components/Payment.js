@@ -7,25 +7,30 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import axios from "./axios";
 import { db } from "../firebase";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { collection } from "firebase/firestore";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Payment = () => {
   // eslint-disable-next-line
   const [{ basket, user }, dispatch] = useStateValue();
 
-  const stripe = useStripe();
+  let stripe = useStripe();
   const elements = useElements();
 
   const [error, setError] = useState(null);
   const [disable, setDisable] = useState(null);
   const [succeed, setSucceed] = useState();
   const [processing, setProcessing] = useState();
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     // generate the special stripe secret which allows us to charge a customer
 
     const getClietSecret = async () => {
+      stripe = await loadStripe(
+        "pk_test_51PBGZRSGsNbt9fDSRrWJBb0vWprdxocSxiOWOXIu5fXvsnS0lJnWe90wejVJfkWG2lH22fdGcfGBRMRqFfVgPxvc005C7QWYU0"
+      );
+
       try {
         const response = await axios
           .post(`/payment/create?total=${getBasket(basket)}`, {
@@ -40,75 +45,60 @@ const Payment = () => {
 
         console.log("response: ", response);
         setClientSecret(response.data.clientSecret);
-      } catch (error) {}
+      } catch (error) {
+        console.log("error", error.message);
+      }
     };
 
     getClietSecret();
   }, [basket]);
 
-  console.log("The SECRET is:", clientSecret);
 
   const handleSubmit = async (event) => {
     //  do all the fency stripe stuff...
     event.preventDefault();
     setProcessing(true);
 
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      })
-      .then(async ({ paymentIntent }) => {
-        // paymentIntent = payment confirmation
-        console.log("db: ", db);
+    // const payload = await stripe
+    //   .confirmCardPayment(clientSecret, {
+    //     payment_method: {
+    //       card: elements.getElement(CardElement),
+    //     },
+    //   })
+    //   .then(async ({ paymentIntent }) => {
+    //     // paymentIntent = payment confirmation
+    //     console.log("db: ", db);
+    //     console.log("id", paymentIntent);
 
-        try {
-          const userId = user?.uid; // Assuming `user` is an object with a `uid` property
+    //     try {
+    //       const userId = user?.uid; // Assuming `user` is an object with a `uid` property
 
-          if (!userId) {
-            console.error(
-              "User ID is required for creating an order document."
-            );
-            return; // Handle the error or exit gracefully
-          }
+    //       if (!userId) {
+    //         console.error(
+    //           "User ID is required for creating an order document."
+    //         );
+    //         return; // Handle the error or exit gracefully
+    //       }
 
-          const orderData = {
-            basket: basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created,
-          };
+    //       const ordersCollection = collection(db, "users", user?.uid, "orders");
 
-          const userOrdersRef = collection(db, "users", userId, "orders"); // Reference to the user's orders collection
+    //       ordersCollection.doc(paymentIntent.id).set({
+    //         basket: basket,
+    //         amount: paymentIntent.amount,
+    //         created: paymentIntent.created,
+    //       });
+    //     } catch (error) {
+    //       alert("incorrect way");
+    //     }
 
-          addDoc(userOrdersRef, orderData)
-            .then((docRef) => {
-              console.log("Order document written with ID:", docRef.id);
-            })
-            .catch((error) => {
-              console.error("Error adding order document:", error);
-            });
-          // db.collection("users")
-          //   .doc(user?.uid)
-          //   .collection("orders")
-          //   .doc(paymentIntent.id)
-          //   .set({
-          //     basket: basket,
-          //     amount: paymentIntent.amount,
-          //     created: paymentIntent.created,
-          //   });
-        } catch (error) {
-          alert("incorrect way");
-        }
+    //   setSucceed(true);
+    //   setError(null);
+    //   setProcessing(false);
 
-        setSucceed(true);
-        setError(null);
-        setProcessing(false);
-
-        dispatch({
-          type: "EMPTY_BASKET",
-        });
-      });
+    //   dispatch({
+    //     type: "EMPTY_BASKET",
+    //   });
+    // });
   };
   if (succeed) {
     return <Navigate to="/orders" replace="true" />;
