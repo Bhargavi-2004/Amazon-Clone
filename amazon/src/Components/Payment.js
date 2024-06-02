@@ -7,7 +7,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import axios from "./axios";
 import { db } from "../firebase";
-import { collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { loadStripe } from "@stripe/stripe-js";
 
 const Payment = () => {
@@ -27,24 +27,31 @@ const Payment = () => {
     // generate the special stripe secret which allows us to charge a customer
 
     const getClietSecret = async () => {
+      const initialBasket = basket;
+      console.log("initialBasket", initialBasket);
+      if (initialBasket <= 0) {
+        console.error("Invalid amount: Please enter a valid amount to pay.");
+        return;
+      }
+
       stripe = await loadStripe(
         "pk_test_51PBGZRSGsNbt9fDSRrWJBb0vWprdxocSxiOWOXIu5fXvsnS0lJnWe90wejVJfkWG2lH22fdGcfGBRMRqFfVgPxvc005C7QWYU0"
       );
 
       try {
-        const response = await axios
-          .post(`/payment/create?total=${getBasket(basket)}`, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            // stripe expects the total in a currency subunits
-          })
-          .catch(function (error) {
-            console.log(error.toJSON());
-          });
+        const response = await axios({
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          url: `http://localhost:5001/challenge-cd848/us-central1/api/payment/create?total=${getBasket(
+            initialBasket
+          )}`,
+        });
 
         console.log("response: ", response);
         setClientSecret(response.data.clientSecret);
+        console.log("c", clientSecret);
       } catch (error) {
         console.log("error", error.message);
       }
@@ -53,52 +60,42 @@ const Payment = () => {
     getClietSecret();
   }, [basket]);
 
-
   const handleSubmit = async (event) => {
     //  do all the fency stripe stuff...
     event.preventDefault();
     setProcessing(true);
+    try {
+      const payload = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      });
+      console.log("Resolved ----> ", payload);
+      // payment_intent = payment confirmation
+      const userId = user?.uid; // Assuming `user` is an object with a `uid` property
+      if (!userId) {
+        console.error("User ID is required for creating an order document.");
+        return;
+      }
 
-    // const payload = await stripe
-    //   .confirmCardPayment(clientSecret, {
-    //     payment_method: {
-    //       card: elements.getElement(CardElement),
-    //     },
-    //   })
-    //   .then(async ({ paymentIntent }) => {
-    //     // paymentIntent = payment confirmation
-    //     console.log("db: ", db);
-    //     console.log("id", paymentIntent);
+      const ordersRef = doc(db, "users", userId, "orders", payload.id);
 
-    //     try {
-    //       const userId = user?.uid; // Assuming `user` is an object with a `uid` property
-
-    //       if (!userId) {
-    //         console.error(
-    //           "User ID is required for creating an order document."
-    //         );
-    //         return; // Handle the error or exit gracefully
-    //       }
-
-    //       const ordersCollection = collection(db, "users", user?.uid, "orders");
-
-    //       ordersCollection.doc(paymentIntent.id).set({
-    //         basket: basket,
-    //         amount: paymentIntent.amount,
-    //         created: paymentIntent.created,
-    //       });
-    //     } catch (error) {
-    //       alert("incorrect way");
-    //     }
-
-    //   setSucceed(true);
-    //   setError(null);
-    //   setProcessing(false);
-
-    //   dispatch({
-    //     type: "EMPTY_BASKET",
-    //   });
-    // });
+      await setDoc(ordersRef, {
+        basket: basket,
+        amount: payload.amount,
+        created: payload.created,
+      });
+      
+      setSucceed(true);
+      setError(null);
+      setProcessing(false);
+    } catch (error) {
+      console.log("Error creating payment intent:", error);
+    } finally {
+      dispatch({
+        type: "EMPTY_BASKET",
+      });
+    }
   };
   if (succeed) {
     return <Navigate to="/orders" replace="true" />;
