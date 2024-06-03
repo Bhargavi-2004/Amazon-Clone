@@ -42,18 +42,18 @@ function Navbar() {
         <div className="flex text-white flex-row mx-5 space-x-5">
           <Link to={!user && "/login"}>
             <div onClick={handlAuthentication} className="option flex flex-col">
-              <span className="text-xs">
-                Hello, {user?.email}
-              </span>
+              <span className="text-xs">Hello, {user?.email || "Guest"}</span>
               <span className="font-bold text-sm">
                 {user ? "Sign out" : "Sign In"}
               </span>
             </div>
           </Link>
-          <div className="option flex flex-col">
-            <span className="text-xs">Returns</span>
-            <span className="font-bold text-sm">& Orders</span>
-          </div>
+          <Link to="/orders">
+            <div className="option flex flex-col">
+              <span className="text-xs">Returns</span>
+              <span className="font-bold text-sm">& Orders</span>
+            </div>
+          </Link>
           <div className="option flex flex-col">
             <span className="text-xs">Your</span>
             <span className="font-bold text-sm">Prime</span>

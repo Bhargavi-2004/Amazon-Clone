@@ -1,7 +1,7 @@
 import React from "react";
 import { useStateValue } from "../context/StateProvider";
 
-const CheckoutProduct = (props) => {
+const CheckoutProduct = (props, { hideButton }) => {
   const [{ basket }, dispatch] = useStateValue();
   const removeFromBasket = () => {
     // rempve the item from vasket
@@ -32,15 +32,17 @@ const CheckoutProduct = (props) => {
           {Array(props.rating)
             .fill()
             .map((_, i) => {
-              return <p>🌟</p>;
+              return <p key={i}>🌟</p>;
             })}
         </div>
-        <button
-          className="bg-yellow-500 p-2 font-bold border-2 rounded-md"
-          onClick={removeFromBasket}
-        >
-          Remove from basket
-        </button>
+        {!props.hideButton && (
+          <button
+            className="bg-yellow-500 p-2 font-bold border-2 rounded-md"
+            onClick={removeFromBasket}
+          >
+            Remove from basket
+          </button>
+        )}
       </div>
     </div>
   );

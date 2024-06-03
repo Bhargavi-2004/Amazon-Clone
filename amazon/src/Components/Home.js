@@ -35,6 +35,7 @@ function Home() {
             price={1599}
             image={anker}
             rating={4}
+            hideButton={false}
           />
           <Product
             id="49538094"
@@ -42,6 +43,7 @@ function Home() {
             price={30400}
             image={ipad}
             rating={4}
+            hideButton={false}
           />
         </div>
         <div className="homeRow flex flex-row md:mx-12 md:my-12">
@@ -51,6 +53,7 @@ function Home() {
             price={26499}
             image={watch}
             rating={4}
+            hideButton={false}
           />
           <Product
             id="23445930"
@@ -58,6 +61,7 @@ function Home() {
             price={19499}
             image={airpod}
             rating={4}
+            hideButton={false}
           />
           <Product
             id="3254354345"
@@ -65,6 +69,7 @@ function Home() {
             price={1799}
             image={pen}
             rating={4}
+            hideButton={false}
           />
         </div>
         <div className="homeRow md:mx-12 md:my-12">
@@ -74,6 +79,7 @@ function Home() {
             price={3399}
             image={laptop}
             rating={4}
+            hideButton={false}
           />
         </div>
       </div>
