@@ -78,14 +78,33 @@ const Payment = () => {
         return;
       }
 
-      const ordersRef = doc(db, "users", userId, "orders", payload.id);
+      const amount = payload.paymentIntent?.amount;
+      const id = payload.paymentIntent?.id;
+      const created = payload.paymentIntent?.created;
 
-      await setDoc(ordersRef, {
-        basket: basket,
-        amount: payload.amount,
-        created: payload.created,
+      const cleanedBasket = basket.map((item) => {
+        const newItem = {}; // Create a new object
+        newItem.id = item.id;
+        newItem.title = item.title;
+        newItem.price = item.price;
+        newItem.rating = item.rating;
+        newItem.image = item.image; // Assuming you have an 'image' property
+        // Include other necessary properties
+        return newItem;
       });
-      
+
+      try {
+        const ordersRef = doc(db, "users", userId, "orders", id);
+
+        await setDoc(ordersRef, {
+          amount: amount,
+          created: created,
+          basket: cleanedBasket,
+        });
+      } catch (error) {
+        console.log("Error creating database in firebase:", error);
+      }
+
       setSucceed(true);
       setError(null);
       setProcessing(false);
