@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StateProvider } from "./context/StateProvider";
 import reducer, { intialState } from "./context/reducer";
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <StateProvider intialState={intialState} reducer={reducer}>
       <App />
     </StateProvider>
+    <ToastContainer />
   </React.StrictMode>
 );
 

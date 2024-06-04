@@ -3,6 +3,8 @@ import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../context/StateProvider";
 import { getBasket } from "../context/reducer";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Subtotal = () => {
   const [{ basket }] = useStateValue();
@@ -50,7 +52,33 @@ const Subtotal = () => {
         prefix="₹"
       />
       <button
-        onClick={() => navigate("/payment")}
+        onClick={() => {
+          if (basket.length > 0) {
+            toast.success("Place the order!!", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+            return navigate("/payment");
+          } else {
+            toast.error("Empty basket!!", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+            return navigate("/");
+          }
+        }}
         className="bg-yellow-500 font-bold border-2 rounded-md "
       >
         Procees to checkout

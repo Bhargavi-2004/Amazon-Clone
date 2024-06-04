@@ -1,14 +1,40 @@
 import React from "react";
 import { useStateValue } from "../context/StateProvider";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CheckoutProduct = (props, { hideButton }) => {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const removeFromBasket = () => {
     // rempve the item from vasket
     dispatch({
       type: "REMOVE_FROM_BASKET",
       id: props.id,
     });
+
+    if (!user) {
+      toast.error("Please sign in to procceed further!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      toast.info("Removed from basket!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   };
 
   return (

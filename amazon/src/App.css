@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+/* Product */
+.product:hover {
+  cursor: pointer;
+  box-shadow: 10px 10px 5px rgb(212, 221, 244), 0 0 0 2px white,
+    0.3em 0.3em 1em rgba(200, 23, 0, 0.6);
+}
+
+/* product button */
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  background-color: rgb(254, 166, 4);
+  color: white;
+  transform: translateY(4px);
+}
+

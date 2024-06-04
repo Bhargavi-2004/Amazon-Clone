@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { db } from "../firebase";
-import {
-  collection,
-  doc,
-  orderBy,
-  onSnapshot,
-  query,
-} from "firebase/firestore";
+import { collection, orderBy, onSnapshot, query } from "firebase/firestore";
 import Order from "./Order";
-import { getBasket } from "../context/reducer";
 import CurrencyFormat from "react-currency-format";
 
 const Orders = () => {
-  const [{ basket, user }, dispacth] = useStateValue();
+  const [{ user }] = useStateValue();
   const [orders, setOrders] = useState([]);
 
   // having brackets as dependancy is important than having not and also both are different
@@ -51,7 +44,7 @@ const Orders = () => {
         <CurrencyFormat
           renderText={(value) => (
             <div className="text-left">
-              <p>
+              <p className="p-12">
                 Order Total:
                 <strong>{value}</strong>
               </p>

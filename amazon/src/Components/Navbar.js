@@ -16,6 +16,8 @@ function Navbar() {
       const signout = signOut(auth);
     }
   };
+  const link =
+    "https://www.primevideo.com/detail/Login/0HBWDH95AN3UG2SX0M4YXRQ80W";
   return (
     <>
       {/* navbar start */}
@@ -31,7 +33,7 @@ function Navbar() {
         </Link>
 
         {/* input + search bar */}
-        <input type="text" className="w-1/2 h-8 ml-1 my-3 bg-white" />
+        <input type="text" className="w-2/3 h-8 ml-1 my-3 bg-white" />
         <img
           src={searchGlass}
           alt="search"
@@ -54,16 +56,18 @@ function Navbar() {
               <span className="font-bold text-sm">& Orders</span>
             </div>
           </Link>
-          <div className="option flex flex-col">
-            <span className="text-xs">Your</span>
-            <span className="font-bold text-sm">Prime</span>
-          </div>
+          <Link to={link} target="_blank">
+            <div className="option flex flex-col">
+              <span className="text-xs">Your</span>
+              <span className="font-bold text-sm">Prime</span>
+            </div>
+          </Link>
           <Link to="/checkout">
             <div className="option flex flex-row">
               <img
                 src={cartIcon}
                 alt="search"
-                className="h-12 my-2 ml-0 p-1.5"
+                className="basket h-12 my-2 ml-0 p-1.5"
               />
               <span className="py-5 font-bold">{basket?.length}</span>
             </div>
