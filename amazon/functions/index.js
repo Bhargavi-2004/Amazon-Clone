@@ -2,7 +2,8 @@ const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(
-  "sk_test_51PBGZRSGsNbt9fDSgEHnRVf5NVA8b3eiIK6veuJJTpn0zmM4i0KMYtmyXIjlzuAmvKskqAre8tjXbB7DPAthuL6B00oq2U2EGG"
+    // eslint-disable-next-line max-len
+    "sk_test_51PBGZRSGsNbt9fDSgEHnRVf5NVA8b3eiIK6veuJJTpn0zmM4i0KMYtmyXIjlzuAmvKskqAre8tjXbB7DPAthuL6B00oq2U2EGG",
 );
 
 // API
@@ -11,7 +12,7 @@ const stripe = require("stripe")(
 const app = express();
 
 // Middleware
-app.use(cors({ origin: true }));
+app.use(cors({origin: true}));
 app.use(express.json());
 
 // API Routes
@@ -28,7 +29,7 @@ app.post("/payment/create", async (request, response) => {
   console.log("Payment Request Recieved!! for this amount --->  ", total);
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: total, //subunits of currencycur
+    amount: total,
     currency: "INR",
   });
 
@@ -43,9 +44,6 @@ exports.api = functions.https.onRequest(app);
 // Example endpoint:
 // http://127.0.0.1:5001/challenge-cd848/us-central1/api
 
-// Deployed:
+// Deployed: not wholw project
 // https://challenge-cd848.web.app/checkout
 
-// https://youtu.be/DMoUqfPybNw?si=BOiyUqrbFH4qewvc&t=961
-
-// https://youtu.be/RDV3Z1KCBvo?si=0U5cnS33VVb4h2MQ&t=26047

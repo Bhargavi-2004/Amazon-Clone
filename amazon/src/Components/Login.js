@@ -38,7 +38,7 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error(
-          `Something went wrong, Please try again!! ${error.message}`,
+          `Username with this email id does not exist, Please register first!! `,
           {
             position: "top-right",
             autoClose: 5000,
