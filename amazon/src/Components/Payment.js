@@ -9,6 +9,8 @@ import axios from "./axios";
 import { db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { loadStripe } from "@stripe/stripe-js";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Payment = () => {
   // eslint-disable-next-line
@@ -101,6 +103,19 @@ const Payment = () => {
           created: created,
           basket: cleanedBasket,
         });
+        toast.success(
+          "Payment is done successfully & you will get your order at delivered address!!",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }
+        );
       } catch (error) {
         console.log("Error creating database in firebase:", error);
       }

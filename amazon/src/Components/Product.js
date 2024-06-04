@@ -48,10 +48,10 @@ function Product(props) {
 
   return (
     <>
-      <div className="product flex flex-col bg-white z-1 items-center mx-3 my-2">
+      <div className="product flex flex-col w-full bg-white z-1 items-center mx-2 my-2">
         {/* product info */}
         <div className="productInfo text-left px-5">
-          <p>{props.title}</p>
+          <p className="w-fit">{props.title}</p>
           {/* product price */}
           <p className="productPrice ">
             <small>₹</small>

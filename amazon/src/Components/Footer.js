@@ -10,8 +10,8 @@ const Footer = () => {
           Back to Top
         </div>
       </a>
-      <div className="footerColumn max-h-min ml-80 mr-80 p-12">
-        <div className="footer-1 flex flex-row h-auto gap-x-20">
+      <div className="footerColumn max-h-min sm:ml-12 sm:mr-12 xl:ml-80 xl:mr-80 md:ml-30 md:mr-30 p-12">
+        <div className="footer-1 flex flex-col m-12 gap-y-10 md:flex md:flex-row h-auto md:gap-x-20">
           <div className="footerColumn-1 d-flex justify-center">
             <div className="colHead font-bold md:w-fit">Get to Kow Us</div>
             <ul className="p-3 w-fit">
@@ -88,8 +88,8 @@ const Footer = () => {
         </Link>
       </div>
       <div className="footer-3 bg-black">
-        <div className="bg-black flex flex-row ml-80 mr-80 p-4 h-auto ">
-          <div className="m-12">
+        <div className="bg-black flex flex-col text-center gap-y-1 md:flex md:flex-row sm:ml-12 sm:mr-12 xl:ml-80 xl:mr-80 md:ml-40 md:mr-40 sm:p-2 md:p-4 p-4 h-auto ">
+          <div className="m-12 sm:m-1 md:p-4 xl:m-12">
             <a href="">
               AbeBooks<br></br>
             </a>
@@ -97,7 +97,7 @@ const Footer = () => {
               Books, art <br></br> & collectibles
             </span>
           </div>
-          <div className="m-12">
+          <div className="m-12 sm:m-1 md:p-4 xl:m-12">
             <a href="">
               Amazon Web Services<br></br>
             </a>
@@ -105,7 +105,7 @@ const Footer = () => {
               Scalable Cloud <br></br>Computing Services
             </span>
           </div>
-          <div className="m-12">
+          <div className="m-12 sm:m-1 md:p-4 xl:m-12">
             <a href="">
               Audible<br></br>
             </a>
@@ -113,7 +113,7 @@ const Footer = () => {
               Download<br></br> Audio Books
             </span>
           </div>
-          <div className="m-12">
+          <div className="m-12 sm:m-1 md:p-4 xl:m-12 hidden md:block">
             <a href="">
               IMDB<br></br>
             </a>

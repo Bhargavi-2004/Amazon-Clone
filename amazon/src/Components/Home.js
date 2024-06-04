@@ -15,6 +15,7 @@ import laptopImage from "../Components/img/laptopImage.jpg";
 import soap from "../Components/img/soap.jpg";
 import bottle from "../Components/img/bottle.jpg";
 import pad from "../Components/img/pad.jpg";
+import slide from "../Components/img/slide.jpg";
 
 function Home() {
   return (
@@ -36,7 +37,7 @@ function Home() {
         {/* banner end */}
 
         {/* products  start*/}
-        <div className="homeRow flex flex-row md:mx-12 md:my-12">
+        <div className="homeRow md:flex md:flex-row grid md:mx-12 md:my-12">
           <Product
             id="12321341"
             title="ANKER Soundcore R50i True Wireless in-Ear Earbuds, TWS with 30H+ Playtime, Clear Calls & High Bass, IPX5-Water Resistant, Soundcore Connect App with 22 Preset EQs, Quick Connectivity, Black Color"
@@ -70,7 +71,7 @@ function Home() {
             hideButton={false}
           />
         </div>
-        <div className="homeRow flex flex-row md:mx-12 md:my-12">
+        <div className="homeRow md:flex md:flex-row grid md:mx-12 md:my-12">
           <Product
             id="49539094"
             title="The Power of Your Subconscious Mind: Original Edition | Premium Paperback | How to control your mind and achieve your dreams | Original "
@@ -105,7 +106,7 @@ function Home() {
           />
         </div>
 
-        <div className="homeRow flex flex-row md:mx-12 md:my-12">
+        <div className="homeRow md:flex md:flex-row grid md:mx-12 md:my-12">
           <Product
             id="90829332"
             title="Huion Inspiroy H950P Graphics Drawing Tablet 8.7x5.4 inches with Tilt Feature Battery-Free Pen 8192 Pressure Sensitivity and 8 User-Defined Shortcuts,Compatible with Mac, Linux(Ubuntu), Windows PC, and Android"
@@ -132,7 +133,7 @@ function Home() {
           />
         </div>
 
-        <div className="homeRow flex flex-row md:mx-12 md:my-12">
+        <div className="homeRow md:flex md:flex-row grid md:mx-12 md:my-12">
           <Product
             id="29829332"
             title="Earthy Sapo Handmade Nuts Over Coconuts Body Cum Hair Soap (coconut milk, mango butter), 100g - Pack of 1"

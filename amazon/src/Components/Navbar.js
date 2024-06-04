@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const [{ basket, user }] = useStateValue();
@@ -13,6 +15,16 @@ function Navbar() {
   const handlAuthentication = () => {
     if (user) {
       // eslint-disable-next-line
+      toast.success("You are logged out successfully!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       const signout = signOut(auth);
     }
   };
@@ -22,22 +34,22 @@ function Navbar() {
     <>
       {/* navbar start */}
 
-      <div className="navbar bg-gray-900 h-14 flex">
+      <div className="navbar overflow-x-auto bg-gray-900 h-14 flex">
         {/* amazon logo */}
         <Link to="/">
           <img
-            className="h-14 w-42 px-2 py-3 object-cover object-center text-white"
+            className="w-14 h-8 mt-5 md:h-9 md:w-full md:px-1 md:py-1 md:object-cover md:object-center text-white"
             src={amazonLogo}
             alt="not found"
           />
         </Link>
 
         {/* input + search bar */}
-        <input type="text" className="w-2/3 h-8 ml-1 my-3 bg-white" />
+        <input type="text" className="sm:w-2/3 sm:h-8 sm:ml-1 sm:my-3 sm:block bg-white hidden" />
         <img
           src={searchGlass}
           alt="search"
-          className="bg-yellow-500 h-8 my-3 ml-0 p-1.5"
+          className="hidden bg-yellow-500 sm:block sm:h-8 sm:my-3 sm:ml-0 sm:p-1.5"
         />
 
         {/* sign in */}

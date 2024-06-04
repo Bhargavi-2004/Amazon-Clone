@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,10 +23,35 @@ const Login = () => {
     const signin = signInWithEmailAndPassword(auth, email, password)
       .then((auth) => {
         if (auth) {
+          toast.success("Signed in successfully!!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
           return navigate("/");
         }
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        toast.error(
+          `Something went wrong, Please try again!! ${error.message}`,
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }
+        );
+        // alert(error.message);
+      });
   };
 
   const register = (e) => {
@@ -36,10 +63,33 @@ const Login = () => {
         // if successfully created a new user with email & password
         console.log(auth);
         if (auth) {
+          toast.success("Registered successfully!!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
           return navigate("/");
         }
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        toast.error(`Username with this email is already exist..!!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        // alert(error.message);
+        console.log(error.message);
+      });
   };
 
   return (
